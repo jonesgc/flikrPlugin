@@ -1,0 +1,1 @@
+flikr_plugin
