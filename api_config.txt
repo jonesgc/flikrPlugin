@@ -1,0 +1,5 @@
+flikr api key:
+e9d832b772414144a351d458238065d4
+
+flikr secret:
+27e75c7eaed62742
