@@ -32,6 +32,7 @@
 
       <div id="test">
         test test
+        <img id="IMG" src="">
       </div>
     </div>
   </body>

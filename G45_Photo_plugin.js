@@ -12,7 +12,7 @@ function getPhotos()
   //var upLDate = document.getElementById().value;
   $.ajax({
     //Base Search method with key
-    url: "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=bccaf6ff67eb7fc29f7c26b0d24def91"
+    url: "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=e9d832b772414144a351d458238065d4"
     //Add city woe_id
     + "&woe_id="+"12723"
     //Add response format
@@ -34,6 +34,8 @@ function getPhotos()
         var secret = json.photos.photo[0].secret;
         var photoURL = "https://farm"+ farm + ".staticflickr.com/"+ server +"/"+ photoID + "_" + secret +".jpg"
         //console.log(farm);
+        var display = document.getElementById("IMG");
+        display.setAttribute("src", photoURL);
         $("#test").append(photoURL);
       },
     type: 'GET'
