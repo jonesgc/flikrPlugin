@@ -33,7 +33,8 @@
       <div id="test">
         test test
         <img id="IMG" src="">
-        <button id="incrementPhoto" onclick="nextPhoto()">Next Photo</button>
+        <button id="incrementPhoto" onclick="displayPhoto()">Show Photo</button>
+        <button id="nxtPhoto">Next Photo</button>
       </div>
     </div>
   </body>
