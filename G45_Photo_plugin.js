@@ -1,17 +1,33 @@
 //Photo Plugin author: Gregory Jones
 //Search and Display photos for a POI or City
 //Currently supported Photo APIs: Flikr
-//See API Config file for service configuration
-
+//See API Config file for service configuration.
 var json;
 var i=0;
+
+//Get api config infomation.
+//Format json.
+var config;
+
+
 //DEBUG birmingham weoid: 12723
 //Base URL:https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=7e60cf64ebe42702907fa713ab085a05
-//Photo url template: https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
 function getPhotos()
 {
-  //Get min upload date
-  //var upLDate = document.getElementById().value;
+  var args;
+
+  //Add arguments
+  if(document.getElementById("dates").checked = true)
+  {
+    if(document.getElementById("minUpLDate").value !== null)
+    {
+      args = args + "&min_upload_date=" + document.getElementById("minUpLDate").value;
+    }
+    if(document.getElementById("minTaDate").value !== null)
+    {
+      args = args + "&min_taken_date=" + document.getElementById("minTaDate").value;
+    }
+  }
   $.ajax({
     //Base Search method with key
     url: "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=e9d832b772414144a351d458238065d4"
@@ -24,13 +40,13 @@ function getPhotos()
      cache: false,
     error: function()
     {
-        $("#test").append("FAIL");
+        $("#imgs").append("FAIL");
     },
 
-      success: function(data)
-      {
-        json = data;
-      },
+    success: function(data)
+    {
+      json = data;
+    },
     type: 'GET'
   });
 }
@@ -49,7 +65,6 @@ function displayPhoto()
   var photoID = json.photos.photo[i].id;
   var secret = json.photos.photo[i].secret;
   var photoURL = "https://farm"+ farm + ".staticflickr.com/"+ server +"/"+ photoID + "_" + secret +".jpg";
-  $("#test").append(photoURL);
 
   $.ajax({
     //Base Search method with key
@@ -57,7 +72,7 @@ function displayPhoto()
     cache: false,
     error: function()
     {
-        $("#test").append("FAIL");
+        $("#imgs").append("FAIL");
     },
 
       success: function(data)

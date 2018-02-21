@@ -1,13 +1,8 @@
-
-<?php
-
-
-
-?>
 <html>
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="G45_Photo_plugin.js"></script>
+    <script type="text/javascript" src="data.json"></script>
   </head>
 
   <body>
@@ -17,6 +12,17 @@
         <option>Birmingham</option>
         <option>Chicago</option>
       </select><br>
+
+      <div id="searchArgs">
+        <label for="dates">Dates -</label>
+        <input id="dates" type="checkbox"><br>
+        <label for="tags">Tags -</label>
+        <input id="tags" type="checkbox"><br>
+        <label for="Long+Lat">Long + Lat</label>
+        <input id="Long+Lat" type="checkbox"><br>
+        <label for="Poi">Place of Interest</label>
+        <input id="Poi" type="checkbox"><br>
+      </div>
 
       <label for="minUpLDate">Minimum Upload Date:</label>
       <input id="minUpLDate" type="date"><br>
@@ -28,13 +34,14 @@
       <input id="Long" type="text"><br>
       <label for="poi"> Place of Interest </label>
       <input id="poi" type="text"><br>
-      <button id="Search" onclick="getPhotos()">Sumbit</button>
+      <label for="tags"> Comma separated tag </label>
+      <input id="tags" type="text"><br>
 
-      <div id="test">
-        test test
+      <button id="Search" onclick="getPhotos()">Search</button>
+      <button id="incrementPhoto" onclick="displayPhoto()">Show Photo</button>
+      <button id="nxtPhoto">Next Photo</button>
+      <div id="imgs">
         <img id="IMG" src="">
-        <button id="incrementPhoto" onclick="displayPhoto()">Show Photo</button>
-        <button id="nxtPhoto">Next Photo</button>
       </div>
     </div>
   </body>
