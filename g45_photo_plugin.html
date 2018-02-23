@@ -2,7 +2,7 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="G45_Photo_plugin.js"></script>
-    <script type="text/javascript" src="data.json"></script>
+    <script type="text/javascript" src="api_config.json"></script>
   </head>
 
   <body>
@@ -14,28 +14,16 @@
       </select><br>
 
       <div id="searchArgs">
-        <label for="dates">Dates -</label>
-        <input id="dates" type="checkbox"><br>
-        <label for="tags">Tags -</label>
-        <input id="tags" type="checkbox"><br>
-        <label for="Long+Lat">Long + Lat</label>
-        <input id="Long+Lat" type="checkbox"><br>
+        <label for="Dates">Dates -</label>
+        <input id="Dates" type="checkbox"><br>
+        <label for="Tags">Tags -</label>
+        <input id="Tags" type="checkbox"><br>
+        <label for="LongLat">Long + Lat</label>
+        <input id="LongLat" type="checkbox"><br>
         <label for="Poi">Place of Interest</label>
         <input id="Poi" type="checkbox"><br>
       </div>
 
-      <label for="minUpLDate">Minimum Upload Date:</label>
-      <input id="minUpLDate" type="date"><br>
-      <label for="minTaDate">Minimum Taken Date:</label>
-      <input id="minTaDate" type="date"><br>
-      <label for="Lat"> Latitude </label>
-      <input id="Lat" type="text"><br>
-      <label for="Long"> Longitude </label>
-      <input id="Long" type="text"><br>
-      <label for="poi"> Place of Interest </label>
-      <input id="poi" type="text"><br>
-      <label for="tags"> Comma separated tag </label>
-      <input id="tags" type="text"><br>
 
       <button id="Search" onclick="getPhotos()">Search</button>
       <button id="incrementPhoto" onclick="displayPhoto()">Show Photo</button>
