@@ -7,14 +7,13 @@ var i=0;
 
 //Get api config infomation.
 //Format json.
-var config;
+var config = $.getJSON("api_config.json");
 
 //Make search argument fields based on checkboxes ticked.
 $(document).ready(function()
 {
   //State variables used to prevent duplication of fields.
   var s1,s2,s3,s4 = false;
-
   //Add both min upload date and min taken date fields.
   $("#Dates").click(function()
   {
@@ -79,16 +78,21 @@ $(document).ready(function()
 //Base URL:https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=7e60cf64ebe42702907fa713ab085a05
 function getPhotos()
 {
-  var args;
+  var args = "";
 
   //Add arguments
-
-  args = args + "&min_upload_date=" + $("#minUpLDate").val();
-
-  console.log(args);
+  if($("#minUpLDate").val())
+  {
+    args += "&min_upload_date=" + $("#minUpLDate").val();
+  }
+  if($("#minTaDate").val())
+  {
+    args += "&min_taken_date=" + $("#minTaDate").val();
+  }
   $.ajax({
     //Base Search method with key
     url: "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=e9d832b772414144a351d458238065d4"
+    + args
     //Add city woe_id
     + "&woe_id="+"12723"
     //Add response format
