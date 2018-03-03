@@ -1,18 +1,40 @@
-<html>
+<!doctype html>
+<html lang="en">
   <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="G45_Photo_plugin.js"></script>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!--STYLESHEET-->
+    <link rel="stylesheet" src="G45_FlikrPlugn_CSS.css">
+    <!-- CONFIG FILE -->
     <script type="text/javascript" src="api_config.json"></script>
+    <!-- MAIN JS SCRIPT-->
+    <script src="G45_Photo_plugin.js"></script>
   </head>
 
   <body>
-    <div id="Search">
-
+    <div id="Search" class="container">
+      <h1 id="header"> Flikr plugin </h1>
+      <div id="imgs" class="collapse">
+        <figure id="imgFig"class="figure">
+          <img id="IMG" class="image-fluid" src="">
+          <figcaption id="figCap"class="fig-caption"></figcaption>
+        </figure>
+        <div class="btn-group">
+          <button id="nxtPhoto" onclick="displayPhoto()" class="btn btn-primary">Next Photo</button>
+          <button id="bckPhoto" onclick="displayPhoto()" class="btn btn-primary">Previous Photo</button>
+        </div>
+      </div>
+        <br>
       <select id="city">
         <option>Birmingham</option>
         <option>Chicago</option>
       </select><br>
-
       <div id="searchArgs">
         <label for="Dates">Dates -</label>
         <input id="Dates" type="checkbox"><br>
@@ -20,17 +42,8 @@
         <input id="Tags" type="checkbox"><br>
         <label for="LongLat">Long + Lat</label>
         <input id="LongLat" type="checkbox"><br>
-        <label for="Poi">Place of Interest</label>
-        <input id="Poi" type="checkbox"><br>
       </div>
-
-
-      <button id="Search" onclick="getPhotos()">Search</button>
-      <button id="incrementPhoto" onclick="displayPhoto()">Show Photo</button>
-      <button id="nxtPhoto">Next Photo</button>
-      <div id="imgs">
-        <img id="IMG" src="">
-      </div>
+      <button id="Search" class="btn btn-primary" onclick="getPhotos()" data-toggle="collapse" data-target="#imgs" >Search</button>
     </div>
   </body>
 </html>

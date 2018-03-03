@@ -4,5 +4,9 @@
     "url" :{
             "base":"https://api.flickr.com/services/rest/?method=flickr.photos.search",
             "format":"&format=json&nojsoncallback=1"
-            }
+          },
+    "cities" :{
+      "Birmingham":"12723",
+      "Chicago":"2379574",
+    }
 }
