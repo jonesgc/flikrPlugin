@@ -18,32 +18,30 @@
   </head>
 
   <body>
+  <div id="flikrPlugin">
     <div id="Search" class="container">
       <h1 id="header"> Flikr plugin </h1>
       <div id="imgs" class="collapse">
         <figure id="imgFig"class="figure">
           <img id="IMG" class="image-fluid" src="">
           <figcaption id="figCap"class="fig-caption"></figcaption>
-        </figure>
+        </figure><br>
         <div class="btn-group">
-          <button id="nxtPhoto" onclick="displayPhoto()" class="btn btn-primary">Next Photo</button>
           <button id="bckPhoto" onclick="displayPhoto()" class="btn btn-primary">Previous Photo</button>
+          <button id="nxtPhoto" onclick="displayPhoto()" class="btn btn-primary">Next Photo</button>
         </div>
       </div>
-        <br>
       <select id="city">
         <option>Birmingham</option>
         <option>Chicago</option>
       </select><br>
-      <div id="searchArgs">
-        <label for="Dates">Dates -</label>
-        <input id="Dates" type="checkbox"><br>
-        <label for="Tags">Tags -</label>
-        <input id="Tags" type="checkbox"><br>
-        <label for="LongLat">Long + Lat</label>
-        <input id="LongLat" type="checkbox"><br>
+      <div id="searchArgs" class="input">
+          <label class="checkbox-inline"><input id="Dates" type="checkbox">Dates</label>
+          <label class="checkbox-inline"><input id="Tags" type="checkbox">Tags</label>
+          <label class="checkbox-inline"><input id="LongLat" type="checkbox">Longitude + Latitude</label>
       </div>
       <button id="Search" class="btn btn-primary" onclick="getPhotos()" data-toggle="collapse" data-target="#imgs" >Search</button>
     </div>
+  </div>
   </body>
 </html>

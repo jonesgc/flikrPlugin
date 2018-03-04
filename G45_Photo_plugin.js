@@ -3,7 +3,7 @@
 //Currently supported Photo APIs: Flikr
 //See API Config file for service configuration.
 var json;
-var i=1;
+var i=0;
 var p =1;
 //Get api config infomation.
 //Format json.
@@ -20,14 +20,24 @@ var config = {
     }
 };
 
-
-
 //Make search argument fields based on checkboxes ticked.
 $(document).ready(function()
 {
   //Forward and back button event listeners.
   document.getElementById("nxtPhoto").addEventListener("click", function() {i = i + 1});
-  document.getElementById("bckPhoto").addEventListener("click", function() {i = i - 1;});
+  document.getElementById("bckPhoto").addEventListener("click", function()
+  {
+    if(i == 0)
+    {
+      $("#bckPhoto").attr("class", "btn btn-secondary");
+      return;
+    }
+    else
+    {
+      $("#bckPhoto").attr("class", "btn btn-primary");
+      i = i - 1;
+    }
+  });
 
   //State variables used to prevent duplication of fields.
   var s1,s2,s3,s4 = false;
@@ -57,7 +67,7 @@ $(document).ready(function()
     else
     {
       $("#Search").append("<div id='LongLatDiv'><label for='Lat'> Latitude </label><input id='Lat' type='text'><br><label for='Long'> Longitude </label><input id='Long' type='text'><br></div>");
-      $("#LongLatDiv").append("<div class='alert alert-warning' role='alert'>This is a warning alert with <a href='#'' class='alert-link'>an example link</a>. Give it a click if you like.</div>");
+      $("#LongLatDiv").append("<div class='alert alert-warning' role='alert'>Both Latitude and Longitude are Required!</div>");
       s2 = true;
     }
   })
@@ -77,7 +87,7 @@ $(document).ready(function()
   })
 });
 
-//Base URL:https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=7e60cf64ebe42702907fa713ab085a05
+//Gets json of image URL components.
 function getPhotos()
 {
   var args = "";
@@ -152,17 +162,20 @@ function displayPhoto()
   //Reset image counter. And iterate into next page.
   if(i == perPage)
   {
-    i = 1;
+    i = 0;
     p = p + 1;
   }
 
+  var date = new Date();
   var farm = json.photos.photo[i].farm;
   var server = json.photos.photo[i].server;
   var photoID = json.photos.photo[i].id;
   var secret = json.photos.photo[i].secret;
+  var title = json.photos.photo[i].title;
+  //Assemble URL
   var photoURL = "https://farm"+ farm + ".staticflickr.com/"+ server +"/"+ photoID + "_" + secret +".jpg";
-  //Set title.
 
+  //Get image from server.
   $.ajax({
     //Base Search method with key
     url: photoURL,
@@ -174,10 +187,11 @@ function displayPhoto()
 
     success: function(data)
     {
-      $("#figCap").text(json.photos.photo[i].title);
-      $("IMG").attr("src",photoURL);
+      $("IMG").attr("src",photoURL+"?"+date.getTime());
+      $("#figCap").text(title);
     },
     type: 'GET'
   });
+
 
 }
