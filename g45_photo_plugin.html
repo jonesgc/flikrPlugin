@@ -9,8 +9,6 @@
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <!--STYLESHEET-->
-    <link rel="stylesheet" src="G45_FlikrPlugn_CSS.css">
     <!-- CONFIG FILE -->
     <script type="text/javascript" src="api_config.json"></script>
     <!-- MAIN JS SCRIPT-->
@@ -27,20 +25,29 @@
           <figcaption id="figCap"class="fig-caption"></figcaption>
         </figure><br>
         <div class="btn-group">
-          <button id="bckPhoto" onclick="displayPhoto()" class="btn btn-primary">Previous Photo</button>
+          <button id="bckPhoto" onclick="displayPhoto()" class="btn btn-secondary">Previous Photo</button>
           <button id="nxtPhoto" onclick="displayPhoto()" class="btn btn-primary">Next Photo</button>
         </div>
       </div>
-      <select id="city">
-        <option>Birmingham</option>
-        <option>Chicago</option>
-      </select><br>
+      <div class="w-25 input-group mt-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="city">Cities</label>
+        </div>
+        <select class="custom-select" id="city">
+          <option>Birmingham</option>
+          <option>Chicago</option>
+        </select>
+      </div><br>
       <div id="searchArgs" class="input">
           <label class="checkbox-inline"><input id="Dates" type="checkbox">Dates</label>
           <label class="checkbox-inline"><input id="Tags" type="checkbox">Tags</label>
           <label class="checkbox-inline"><input id="LongLat" type="checkbox">Longitude + Latitude</label>
       </div>
-      <button id="Search" class="btn btn-primary" onclick="getPhotos()" data-toggle="collapse" data-target="#imgs" >Search</button>
+      <button id="Searchbtn" class="btn btn-primary" onclick="getPhotos()" >Search</button>
+      <div id="modeSel" class="btn-group">
+        <button id="single"  class="btn btn-outline-info" onclick="mode('1')">Single Photo</button>
+        <button id="multiple"  class="btn btn-outline-info" onclick="mode('2')">Multiple Photos</button>
+      </div>
     </div>
   </div>
   </body>
