@@ -239,8 +239,17 @@ function mode(int)
   {
     $("#multiple").attr("class", "btn btn-info");
     $("#single").attr("class", "btn btn-outline-info");
-    $("#modeSel").append("<input id='photoNo' type='text'></input>")
-    modeVal = 2;
+    //Add an input for the number of image to display, but check if there is already one there.
+    if($("#photoNo").length)
+    {
+      modeVal = 2;
+    }
+    else
+    {
+      $("#modeSel").append("<input id='photoNo' type='text'></input>");
+      modeVal = 2;
+    }
+
   }
   else
   {
@@ -276,7 +285,7 @@ function displayMultiplePhoto()
   for(x=0; x < photoNo; x++)
   {
     var date = new Date();
-    var photoURL = [];
+    var photoURL=[];
     var farm = flikrJSON.photos.photo[x].farm;
     var server = flikrJSON.photos.photo[x].server;
     var photoID = flikrJSON.photos.photo[x].id;
@@ -285,25 +294,30 @@ function displayMultiplePhoto()
 
     //Assemble URL
     photoURL[x] = "https://farm"+ farm + ".staticflickr.com/"+ server +"/"+ photoID + "_" + secret +".jpg";
-    console.log(photoURL);
+    console.log(photoURL[x]);
 
+    //Get images from server.
+    //Done synchronosly, need to research a better method.
+    $.ajax(
+    {
+      url: photoURL[x],
+      cache: false,
+      passThru: x,
+      async: false,
+      error: function()
+      {
+        $("#imgs").append("Failed to retrieve Image - @Multiple URL stage");
+      },
+
+      success: function(data)
+      {
+        x = this.passThru;
+        console.log(x);
+        //Attach a date to force the image to repload.
+        $("#imgs").append("<img class='image-fluid' src=" + photoURL[x]+'?'+date.getTime()+'>');
+      },
+      type: 'GET'
+    });
   }
-  //Get images from server.
-  $.ajax(
-  {
-    url: photoURL,
-    cache: false,
-    error: function()
-    {
-      $("#imgs").append("Failed to retrieve Image - @Multiple URL stage");
-    },
-
-    success: function(data)
-    {
-      //Attach a date to force the image to repload.
-      $("#imgs").append("<img class='image-fluid' src=" + photoURL[1]+'?'+date.getTime()+'>');
-    },
-    type: 'GET'
-  });
 
 }
