@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+  <meta name="description" content="Individual Report">
+  <meta name="author" content="Gregory Jones">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Individual Report</title>
+</head>
+ <body>
+    <div>
+      <h1>Introduction</h1>
+      <p>This report will outline my experience with the individual section of the assignment. For this component I chose the flikr plugin, since I had an interest in seeing how the image api worked. Additionally
+      I wanted to explore the use of ajax in making Single Page Applications. During the creation of my plugin I learnt a great deal but it was building on an already solid foundation from year 1 modules.</p>
+	</div>
+    <div>
+      <h2>Methodology</h2>
+      <p>Since the design of my individual project was to be indipendent of the group work, yet have the ability to be included if needed. This meant I did not require use of database. This allowed me to work input
+      a seperate development environment of my choosing.I used tools that I was already familiar with from previous modules. This meant using XAMPP to provide the localhost sever to develop the plugin.</p>
+    </div>
+    <div>
+      <h2 >Plugin Overview</h2>
+      <p>As of writing this report the plugin has the ability to display a single photo or multiple photos. These photos are retrieved from flikr after the search query has been processed, this query is made of
+      arguments of the users choosing, due to the way the plugin was designed the only argument that will always be passed to the flikr sever is the woeID of the city. The cities that I have submitted are the twins
+      we selected for the group assignment, Birmingham and Chicago. However new cities could easily be added to the api_config.json. The other arguments are optional and the plugin will still function if they are not used.
+      </p>
+      <p>I had intended to implement a version of my plugin that would link to the group assignment. The aim of this was to search Places of interest (POI) in flikr. However flikr requires a flikr place id, this can be retireved
+      with another API method which then needs to be searched again. In the end I did not have enough time to implement this feature. The display multiple images feature is the feature I am least pround of. Since it does not work
+      the way I wanted it to. Originally I had imaged this feature would add the ability to show multiple images in "pages" then the user could scroll the pages. And that this functionaility would be provided on an asynchronous basis
+      like the display single method. But due to problems with the asynch requests I had to change this method to be synchronos in order to display each image correctly.</p>
+    </div>
+    <div>
+      <h2>Learning Outcomes</h2>
+      <p>I learnt a great deal during the development of this plugin, so much that if I was to start again I would approach it differently in several areas. In the year one module Web Programming I learnt some javascript and during
+      that module I came across jQuert a number of times in my search for solutions to common problems. To have the opertunity to work with jQuery in a proper task was interesting, despite this there are some ordinary javascript sections
+      of my code where I could not find the right jQuery method to do what I wanted, this was likely due to lack of knowledge of jQuery and not being able to chain functions together to achieve the same functionaility in a more consise manner.
+      An example of this would be the event listeners, where I could have used the .click method but instead I used the javascript method to add the event listeners on load.</p>
+      <p>In regards to my design I am happy with how i was able to achieve the functionaility I did using ajax and adding/removing elements dyncamically. I would have liked to work on the image caching problem for higher marks in this
+      task but due to the nature of my design I was not able to to this in a straight forwards way. I had theorised a method of doing it but was not able to put any serious effort into investigating if it was even viable.</p>
+      <p>During the course of development of this plugin I ran into a few major problems, such as how to format the query to the flikr API. This particular problem was solved when I found in the flikr api development the ability to
+      test api calls with various arguments and see what output is produced. However most importantly the structure of the request URL. An example of this service prodivded by flikr for the <a href="https://www.flickr.com/services/api/explore/flickr.photos.search">search method</a>.
+      The discovery of this feature allowed me to properly add the user input arguments to the request. This helped me design how my plugin would work i.e. get query --> get json data --> get image url.</p>
+      <p>The last major area of learning for me was bootstrap, I had done some css before, but I had never used bootstrap. Because of this I only touch on very basic elements of bootstrap and it is something I would like to explore further. Becuase
+      of bootstrap I had to do only minor things in CSS my self, this greatly increased the amount of time I had to work on the functionaility.</p>
+      <p> Overrall I think I could have done more, and that what I have done is acceptable but could be better, I could make excuses as to why but really it was just mismanagement of time and spending too much time reading how to get functionaility
+      I did not need or plan to use. But this said I still enjoyed the assignment both group and individual elements and would like to continue learning about these topics to improve.</p>
+    </div>
+  </body>
+</html>

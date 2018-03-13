@@ -1,7 +1,7 @@
 //Photo Plugin author: Gregory Jones
-//Search and Display photos for a POI or City
+//Search and Display photos for a City
 //Currently supported Photo APIs: Flikr
-//See API Config file for service configuration.
+
 var flikrJSON;
 var i=0;
 var p =1;
@@ -21,7 +21,7 @@ var config = {
     }
 };
 
-//Make search argument fields based on checkboxes ticked.
+//Initalise plugin components. For integration a check must be performed to see if it is integrated or not.
 $(document).ready(function()
 {
   //Forward and back button event listeners.
@@ -62,7 +62,7 @@ $(document).ready(function()
     }
     else
     {
-      $("#searchArgs").append("<div id='DatesDiv'><label for='minUpLDate'>Minimum Upload Date:</label><input id='minUpLDate' type='date'><br><label for='minTaDate'>Minimum Taken Date:</label><input id='minTaDate' type='date'><br></div>")
+      $("#searchArgs").append("<div id='DatesDiv'><label for='minUpLDate'>Minimum Upload Date:</label><input id='minUpLDate' class='dynamIn' type='date'><br><label for='minTaDate'>Minimum Taken Date:</label><input id='minTaDate' class='dynamIn' type='date'><br></div>")
       s1 = true;
     }
   })
@@ -77,7 +77,7 @@ $(document).ready(function()
     }
     else
     {
-      $("#searchArgs").append("<div id='LongLatDiv'><label for='Lat'> Latitude </label><input id='Lat' type='text'><br><label for='Long'> Longitude </label><input id='Long' type='text'><br></div>");
+      $("#searchArgs").append("<div id='LongLatDiv'><label for='Lat'> Latitude </label><input id='Lat' class='dynamIn' type='text'><br><label for='Long'> Longitude </label><input id='Long' class='dynamIn' type='text'><br></div>");
       $("#LongLatDiv").append("<div class='alert alert-warning' role='alert'>Both Latitude and Longitude are Required!</div>");
       s2 = true;
     }
@@ -92,13 +92,13 @@ $(document).ready(function()
     }
     else
     {
-      $("#searchArgs").append("<div id='TagDiv'><label for='tags'> Comma separated tag </label><input id='tags' type='text'><br></div>")
+      $("#searchArgs").append("<div id='TagDiv'><label for='tags'> Comma separated tag </label><input id='tags' class='dynamIn' type='text'><br></div>")
       s4 = true;
     }
   })
 });
 
-//Gets json of image URL components.
+//Gets json of image URL components from Flikr. Arguments will be added in the order required by the API.
 function getPhotos()
 {
   var args = "";
@@ -158,9 +158,48 @@ function getPhotos()
   });
 }
 
+//Control button displays and determine which type of display type is requested.
+function mode(int)
+{
+  //Check which button was pressed and fill it showing it was the one pressed.
+  //1 is single mode.
+  if(int == 1)
+  {
+    $("#single").attr("class", "btn btn-info");
+    $("#multiple").attr("class", "btn btn-outline-info");
+
+    $("#photoNoId").remove();
+    $("#photoNo").remove();
+    modeVal = 1;
+  }
+  //Multiple mode.
+  else if (int == 2)
+  {
+    $("#multiple").attr("class", "btn btn-info");
+    $("#single").attr("class", "btn btn-outline-info");
+    //Add an input for the number of image to display, but check if there is already one there.
+    if($("#photoNo").length)
+    {
+      modeVal = 2;
+    }
+    else
+    {
+      $("#modeSel").append("<label id='photoNoId' for='photoNo'>No. Photos to display:</label><input id='photoNo' type='text' value='1'></input>");
+      modeVal = 2;
+    }
+
+  }
+  else
+  {
+    console.log("Error @mode assignment!");
+    console.log(int);
+  }
+}
+
 //Entry point into the photo display functions, determines which function to be called.
 function displayPhoto()
 {
+  //Remove multiple images that mgiht have been added before.
 
   if(modeVal == 1)
   {
@@ -174,6 +213,10 @@ function displayPhoto()
 
 function displaySinglePhoto()
 {
+
+  $(".multi").remove();
+  $("#imgBtns").show();
+  $("#imgFig").show();
   //Current Page
   var page = flikrJSON.photos.page;
   //Total Number of pages
@@ -223,44 +266,15 @@ function displaySinglePhoto()
 
 }
 
-function mode(int)
-{
-  //Check which button was pressed and fill it showing it was the one pressed.
-  //1 is single mode.
-  if(int == 1)
-  {
-    $("#single").attr("class", "btn btn-info");
-    $("#multiple").attr("class", "btn btn-outline-info");
-    modeVal = 1;
-  }
-  //Multiple mode.
-  //Max displayed at once is 20 1/5 of a page.
-  else if (int == 2)
-  {
-    $("#multiple").attr("class", "btn btn-info");
-    $("#single").attr("class", "btn btn-outline-info");
-    //Add an input for the number of image to display, but check if there is already one there.
-    if($("#photoNo").length)
-    {
-      modeVal = 2;
-    }
-    else
-    {
-      $("#modeSel").append("<input id='photoNo' type='text'></input>");
-      modeVal = 2;
-    }
-
-  }
-  else
-  {
-    console.log("Error in mode assignment!");
-    console.log(int);
-  }
-}
-
 //When selected get multiple photos and display them.
 function displayMultiplePhoto()
 {
+  //Remove interface for single display.
+  if($("#imgFig").length)
+  {
+    $("#imgBtns").hide();
+    $("#imgFig").hide();
+  }
 
   //Current Page
   var page = flikrJSON.photos.page;
@@ -272,13 +286,11 @@ function displayMultiplePhoto()
   //Check the total number of images.
   var total = flikrJSON.photos.total;
 
-
-
   //Get number of photos to be shown perpage.
   var photoNo = $("#photoNo").val();
   if(photoNo === undefined)
   {
-    console.log("Could not retrieve number of photos to be shown in displayMultiPhoto");
+    console.log("Could not retrieve number of photos to be shown in @displayMultiPhoto");
   }
 
   //Create the URLs
@@ -312,9 +324,8 @@ function displayMultiplePhoto()
       success: function(data)
       {
         x = this.passThru;
-        console.log(x);
         //Attach a date to force the image to repload.
-        $("#imgs").append("<img class='image-fluid' src=" + photoURL[x]+'?'+date.getTime()+'>');
+        $("#imgs").append("<img class='multi' image-fluid' src=" + photoURL[x]+'?'+date.getTime()+'>');
       },
       type: 'GET'
     });

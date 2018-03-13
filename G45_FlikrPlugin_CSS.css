@@ -1,0 +1,12 @@
+/* Author: Gregory Jones */
+/*Purpose of this CSS is to tune parts of the plugin that cannot be done with default bootstrap classes.*/
+
+/*Dynamically created inputs*/
+.dynamIn{
+  width: 150px;
+  border-radius: 5px;
+}
+#photoNo{
+  width: 40px;
+  border-radius: 5px;
+}
