@@ -5,7 +5,7 @@
 var flikrJSON;
 var i=0;
 var p =1;
-var modeVal =0;
+var modeVal =1;
 //Get api config infomation.
 //Format json.
 var config = {
@@ -112,7 +112,23 @@ function getPhotos()
   //tags
   if($("#tags").val())
   {
-    args += "&tags=" + $("#tags").val();
+    //Regex taken from https://stackoverflow.com/questions/8205610/regex-for-tags-separated-by-spaces-commas-up-to-n-tags answer by Regexident.
+    var tagReg = new RegExp('^[a-zA-Z0-9]+(?:[ ,]+[a-zA-Z0-9]+){0,5}$');
+    var tags = $("#tags").val();
+    var resp = tagReg.test(tags);
+
+    if(resp)
+    {
+      console.log("Regex Validated @ Tags");
+      args += "&tags=" + $("#tags").val();
+    }
+    else
+    {
+      console.log("Failed regex validation @ Tags");
+    }
+
+
+
   }
   //Dates
   if($("#minUpLDate").val())
@@ -167,7 +183,7 @@ function mode(int)
   {
     $("#single").attr("class", "btn btn-info");
     $("#multiple").attr("class", "btn btn-outline-info");
-
+    //Remove elements for multiple photo selection.
     $("#photoNoId").remove();
     $("#photoNo").remove();
     modeVal = 1;
@@ -258,7 +274,7 @@ function displaySinglePhoto()
     success: function(data)
     {
       //Attach a date to force the image to repload.
-      $("IMG").attr("src",photoURL+"?"+date.getTime());
+      $("#fImg").attr("src",photoURL+"?"+date.getTime());
       $("#figCap").text(title);
     },
     type: 'GET'

@@ -18,13 +18,13 @@
   </head>
 
   <body>
-  <button class="btn btn-primary" data-toggle="collapse" data-target="#flikrPlugin"> FlikrPlugin</button>
-  <div id="flikrPlugin" class="collapse">
+  <button class="btn btn-primary" data-toggle="toggle" data-target="#flikrPlugin"> FlikrPlugin</button>
+  <div id="flikrPlugin" class="">
     <div id="Search" class="container">
       <h1 id="header"> Flikr plugin </h1>
       <div id="imgs" class="collapse">
         <figure id="imgFig"class="figure">
-          <img id="IMG" class="image-fluid" src="">
+          <img id="fImg" class="image-fluid" src="">
           <figcaption id="figCap"class="fig-caption"></figcaption>
         </figure><br>
         <div id="imgBtns"class="btn-group">
@@ -48,7 +48,7 @@
       </div>
       <button id="Searchbtn" class="btn btn-primary" onclick="getPhotos()" >Search</button>
       <div id="modeSel" class="btn-group">
-        <button id="single"  class="btn btn-outline-info" onclick="mode('1')">Single Photo</button>
+        <button id="single"  class="btn btn-info" onclick="mode('1')">Single Photo</button>
         <button id="multiple"  class="btn btn-outline-info" onclick="mode('2')">Multiple Photos</button>
       </div>
     </div>
